@@ -40,7 +40,6 @@ export const Trips: CollectionConfig = {
       name: 'featuredMedia',
       type: 'upload',
       relationTo: 'media',
-      required: true,
       label: {
         en: 'Featured Image/Video',
         pl: 'Zdjęcie tytułowe / filmik',

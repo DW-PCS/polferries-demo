@@ -1,8 +1,24 @@
 import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres';
-import { slateEditor } from '@payloadcms/richtext-slate';
+import {
+  BlockquoteFeature,
+  BoldFeature,
+  EXPERIMENTAL_TableFeature,
+  FixedToolbarFeature,
+  HeadingFeature,
+  ItalicFeature,
+  lexicalEditor,
+  LinkFeature,
+  OrderedListFeature,
+  StrikethroughFeature,
+  UnderlineFeature,
+  UnorderedListFeature,
+} from '@payloadcms/richtext-lexical';
+
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { en } from '@payloadcms/translations/languages/en';
 import { pl } from '@payloadcms/translations/languages/pl';
+import { sv } from '@payloadcms/translations/languages/sv';
+
 import path from 'path';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
@@ -10,13 +26,13 @@ import sharp from 'sharp';
 import { Media } from './collections/Media';
 
 import { Navigation } from './collections/Navigation';
+import { Trips } from './collections/Tours';
 import { Users } from './collections/Users';
 import { MainPage } from './globals/MainPage';
 
 export default buildConfig({
-  editor: slateEditor({}),
   globals: [MainPage],
-  collections: [Users, Media, Navigation],
+  collections: [Users, Media, Navigation, Trips],
   plugins: [
     vercelBlobStorage({
       enabled: true,
@@ -31,15 +47,15 @@ export default buildConfig({
     }),
   ],
   i18n: {
-    //@ts-ignore
-    supportedLanguages: { en, pl },
+    supportedLanguages: { en, pl, sv },
     fallbackLanguage: 'pl',
   },
 
   localization: {
     locales: [
-      { label: 'English', code: 'en' },
+      { label: 'Angielski', code: 'en' },
       { label: 'Polski', code: 'pl' },
+      { label: 'Szwecki', code: 'se' },
     ],
     defaultLocale: 'pl',
     fallback: true,
@@ -68,4 +84,21 @@ export default buildConfig({
     autoGenerate: true,
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
+
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      FixedToolbarFeature(),
+      HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+      BoldFeature(),
+      ItalicFeature(),
+      UnderlineFeature(),
+      StrikethroughFeature(),
+      LinkFeature(),
+      UnorderedListFeature(),
+      OrderedListFeature(),
+      BlockquoteFeature(),
+      EXPERIMENTAL_TableFeature(),
+    ],
+  }),
 });
