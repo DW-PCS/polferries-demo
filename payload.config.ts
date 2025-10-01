@@ -9,14 +9,14 @@ import sharp from 'sharp';
 
 import { Media } from './collections/Media';
 
-import { NavigationEN, NavigationPL } from './collections/Navigation';
+import { Navigation } from './collections/Navigation';
 import { Users } from './collections/Users';
 import { MainPage } from './globals/MainPage';
 
 export default buildConfig({
   editor: slateEditor({}),
   globals: [MainPage],
-  collections: [Users, Media, NavigationPL, NavigationEN],
+  collections: [Users, Media, Navigation],
   plugins: [
     vercelBlobStorage({
       enabled: true,

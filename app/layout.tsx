@@ -1,8 +1,6 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 
-import Navigation from '@/components/Navigation';
-import { payload } from '@/config';
 import './globals.css';
 
 const geistSans = Geist({
@@ -26,13 +24,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const navigation = await payload.find({ collection: 'navigation_pl' });
+  // const navigation = await payload.find({ collection: 'navigation' });
 
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navigation navigation={navigation} />
+        {/* <Navigation navigation={navigation} /> */}
         {children}
       </body>
     </html>
