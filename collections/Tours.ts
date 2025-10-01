@@ -131,7 +131,6 @@ export const Trips: CollectionConfig = {
     {
       name: 'dailyProgram',
       type: 'array',
-      localized: true,
       label: {
         en: 'Daily Program',
         pl: 'Program dla każdego dnia',
@@ -153,6 +152,7 @@ export const Trips: CollectionConfig = {
           name: 'description',
           type: 'richText',
           required: true,
+          localized: true,
           label: {
             en: 'Day Description',
             pl: 'Opis dnia',
