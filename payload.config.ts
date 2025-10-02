@@ -27,9 +27,10 @@ import { Attractions } from './collections/Attractions';
 import { Footer, Media, Navigation, Offers, Tours, Users } from './collections/index';
 import { Promotions } from './collections/Promotions';
 import { MainPage } from './globals/MainPage';
+import { SocialMedia } from './globals/SocialMedia';
 
 export default buildConfig({
-  globals: [MainPage, Footer, Navigation],
+  globals: [MainPage, Footer, Navigation, SocialMedia],
   collections: [Users, Media, Tours, Offers, Promotions, Attractions],
   plugins: [
     vercelBlobStorage({
