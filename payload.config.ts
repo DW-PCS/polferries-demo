@@ -23,12 +23,12 @@ import path from 'path';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
-import { Media, Navigation, Offers, Tours, Users } from './collections/index';
+import { Footer, Media, Navigation, Offers, Tours, Users } from './collections/index';
 import { MainPage } from './globals/MainPage';
 
 export default buildConfig({
-  globals: [MainPage],
-  collections: [Users, Media, Navigation, Tours, Offers],
+  globals: [MainPage, Footer, Navigation],
+  collections: [Users, Media, Tours, Offers],
   plugins: [
     vercelBlobStorage({
       enabled: true,
