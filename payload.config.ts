@@ -1,4 +1,4 @@
-import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres";
+import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres';
 import {
   BlockquoteFeature,
   BoldFeature,
@@ -12,40 +12,32 @@ import {
   StrikethroughFeature,
   UnderlineFeature,
   UnorderedListFeature,
-} from "@payloadcms/richtext-lexical";
+} from '@payloadcms/richtext-lexical';
 
-import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
-import { en } from "@payloadcms/translations/languages/en";
-import { pl } from "@payloadcms/translations/languages/pl";
-import { sv } from "@payloadcms/translations/languages/sv";
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
+import { en } from '@payloadcms/translations/languages/en';
+import { pl } from '@payloadcms/translations/languages/pl';
+import { sv } from '@payloadcms/translations/languages/sv';
 
-import path from "path";
-import { buildConfig } from "payload";
-import sharp from "sharp";
+import path from 'path';
+import { buildConfig } from 'payload';
+import sharp from 'sharp';
 
-import { Media, Navigation, Offers, Tours, Users } from "./collections/index";
-import { MainPage } from "./globals/MainPage";
-import { Promotions } from "./collections/Promotions";
-import { Attractions } from "./collections/Attractions";
+import { Attractions } from './collections/Attractions';
+import { Footer, Media, Navigation, Offers, Tours, Users } from './collections/index';
+import { Promotions } from './collections/Promotions';
+import { MainPage } from './globals/MainPage';
 
 export default buildConfig({
-  globals: [MainPage],
-  collections: [
-    Users,
-    Media,
-    Navigation,
-    Tours,
-    Offers,
-    Promotions,
-    Attractions,
-  ],
+  globals: [MainPage, Footer, Navigation],
+  collections: [Users, Media, Tours, Offers, Promotions, Attractions],
   plugins: [
     vercelBlobStorage({
       enabled: true,
       collections: {
         media: true,
-        "media-with-prefix": {
-          prefix: "my-prefix",
+        'media-with-prefix': {
+          prefix: 'my-prefix',
         },
       },
 
@@ -54,20 +46,20 @@ export default buildConfig({
   ],
   i18n: {
     supportedLanguages: { en, pl, sv },
-    fallbackLanguage: "pl",
+    fallbackLanguage: 'pl',
   },
 
   localization: {
     locales: [
-      { label: "Angielski", code: "en" },
-      { label: "Polski", code: "pl" },
-      { label: "Szwecki", code: "se" },
+      { label: 'Angielski', code: 'en' },
+      { label: 'Polski', code: 'pl' },
+      { label: 'Szwecki', code: 'se' },
     ],
-    defaultLocale: "pl",
+    defaultLocale: 'pl',
     fallback: true,
   },
 
-  secret: process.env.PAYLOAD_SECRET || "",
+  secret: process.env.PAYLOAD_SECRET || '',
 
   db: vercelPostgresAdapter({
     pool: {
@@ -78,8 +70,8 @@ export default buildConfig({
   sharp,
 
   cors: {
-    origins: ["http://localhost:3000"],
-    headers: ["x-custom-header"],
+    origins: ['http://localhost:3000'],
+    headers: ['x-custom-header'],
   },
 
   admin: {
@@ -88,14 +80,14 @@ export default buildConfig({
 
   typescript: {
     autoGenerate: true,
-    outputFile: path.resolve(__dirname, "payload-types.ts"),
+    outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
 
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
       FixedToolbarFeature(),
-      HeadingFeature({ enabledHeadingSizes: ["h1", "h2", "h3", "h4"] }),
+      HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
       BoldFeature(),
       ItalicFeature(),
       UnderlineFeature(),
