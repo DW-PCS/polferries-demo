@@ -13,12 +13,10 @@ import {
   UnderlineFeature,
   UnorderedListFeature,
 } from '@payloadcms/richtext-lexical';
-
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob';
 import { en } from '@payloadcms/translations/languages/en';
 import { pl } from '@payloadcms/translations/languages/pl';
 import { sv } from '@payloadcms/translations/languages/sv';
-
 import path from 'path';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
@@ -26,6 +24,7 @@ import sharp from 'sharp';
 import { Attractions } from './collections/Attractions';
 import { Footer, Media, Navigation, Offers, Tours, Users } from './collections/index';
 import { Promotions } from './collections/Promotions';
+
 import { MainPage } from './globals/MainPage';
 import { SocialMedia } from './globals/SocialMedia';
 
@@ -41,7 +40,6 @@ export default buildConfig({
           prefix: 'my-prefix',
         },
       },
-
       token: process.env.BLOB_READ_WRITE_TOKEN,
     }),
   ],
@@ -49,7 +47,6 @@ export default buildConfig({
     supportedLanguages: { en, pl, sv },
     fallbackLanguage: 'pl',
   },
-
   localization: {
     locales: [
       { label: 'Angielski', code: 'en' },
@@ -59,31 +56,35 @@ export default buildConfig({
     defaultLocale: 'pl',
     fallback: true,
   },
-
   secret: process.env.PAYLOAD_SECRET || '',
-
   db: vercelPostgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL,
     },
   }),
-
   sharp,
-
   cors: {
     origins: ['http://localhost:3000'],
     headers: ['x-custom-header'],
   },
-
   admin: {
+    meta: {
+      icons: {
+        icon: '/icon.ico',
+      },
+    },
     user: Users.slug,
+    components: {
+      graphics: {
+        Logo: '@/components/ui/logo#Logo',
+        Icon: '@/components/ui/icon#Icon',
+      },
+    },
   },
-
   typescript: {
     autoGenerate: true,
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
   },
-
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [
       ...defaultFeatures,
