@@ -66,6 +66,7 @@ export default buildConfig({
   cors: {
     origins: ['http://localhost:3000'],
     headers: ['x-custom-header'],
+
   },
   admin: {
     meta: {
