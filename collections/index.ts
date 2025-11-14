@@ -1,6 +1,6 @@
 export { Footer } from '../globals/Footer';
-export { Media } from './Media';
 export { Navigation } from '../globals/Navigation';
+export { Media } from './Media';
 export { Offers } from './Offers';
-export { Tours } from './Tours';
+export { Trips } from './Tours';
 export { Users } from './Users';

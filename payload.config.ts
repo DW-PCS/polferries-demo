@@ -22,7 +22,7 @@ import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
 import { Attractions } from './collections/Attractions';
-import { Footer, Media, Navigation, Offers, Tours, Users } from './collections/index';
+import { Footer, Media, Navigation, Offers, Trips, Users } from './collections/index';
 import { Promotions } from './collections/Promotions';
 
 import { MainPage } from './globals/MainPage';
@@ -30,7 +30,7 @@ import { SocialMedia } from './globals/SocialMedia';
 
 export default buildConfig({
   globals: [MainPage, Footer, Navigation, SocialMedia],
-  collections: [Users, Media, Tours, Offers, Promotions, Attractions],
+  collections: [Users, Media, Trips, Offers, Promotions, Attractions],
   plugins: [
     vercelBlobStorage({
       enabled: true,
@@ -66,7 +66,6 @@ export default buildConfig({
   cors: {
     origins: ['http://localhost:3000'],
     headers: ['x-custom-header'],
-
   },
   admin: {
     meta: {

@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload';
 import { isAdminOrHasAccess } from './access/isAdminOrHasAccess';
 
-export const Tours: CollectionConfig = {
+export const Trips: CollectionConfig = {
   slug: 'trips',
 
   labels: {

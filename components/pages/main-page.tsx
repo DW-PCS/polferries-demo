@@ -1,7 +1,8 @@
 'use client';
 
-import { JsonObject } from 'payload';
 import { useAdminConfig } from '@/providers/AdminConfigProvider';
+import Link from 'next/link';
+import { JsonObject } from 'payload';
 import { useState } from 'react';
 
 interface MainPageProps {
@@ -29,7 +30,8 @@ const MainPage = ({ data }: MainPageProps) => {
       about: 'O firmie',
       contact: 'Kontakt',
       buyTicket: 'KUP BILET',
-      description: 'Oferujemy komfortowe promy, niezapomniane wycieczki i atrakcyjne pakiety turystyczne do Szwecji i Danii.',
+      description:
+        'Oferujemy komfortowe promy, niezapomniane wycieczki i atrakcyjne pakiety turystyczne do Szwecji i Danii.',
       cta: 'KUP BILET',
       feature1Title: 'Rozkład i Cennik',
       feature1Desc: 'Regularne połączenia do Szwecji i Danii',
@@ -54,7 +56,8 @@ const MainPage = ({ data }: MainPageProps) => {
       about: 'About us',
       contact: 'Contact',
       buyTicket: 'BUY TICKET',
-      description: 'We offer comfortable ferries, unforgettable tours and attractive tourist packages to Sweden and Denmark.',
+      description:
+        'We offer comfortable ferries, unforgettable tours and attractive tourist packages to Sweden and Denmark.',
       cta: 'BUY TICKET',
       feature1Title: 'Schedule & Prices',
       feature1Desc: 'Regular connections to Sweden and Denmark',
@@ -79,7 +82,8 @@ const MainPage = ({ data }: MainPageProps) => {
       about: 'Om oss',
       contact: 'Kontakt',
       buyTicket: 'KÖP BILJETT',
-      description: 'Vi erbjuder bekväma färjor, oförglömliga resor och attraktiva turistpaket till Sverige och Danmark.',
+      description:
+        'Vi erbjuder bekväma färjor, oförglömliga resor och attraktiva turistpaket till Sverige och Danmark.',
       cta: 'KÖP BILJETT',
       feature1Title: 'Tidtabell & Priser',
       feature1Desc: 'Regelbundna förbindelser till Sverige och Danmark',
@@ -117,12 +121,18 @@ const MainPage = ({ data }: MainPageProps) => {
       <div className="border-b border-gray-200">
         <div className="container mx-auto px-6 py-3 flex justify-between items-center">
           <div className="flex gap-6 text-xs">
-            <a href="#" className="text-gray-600 hover:text-[#003d7a] transition">{currentContent.about}</a>
-            <a href="#" className="text-gray-600 hover:text-[#003d7a] transition">Kariera</a>
-            <a href="#" className="text-gray-600 hover:text-[#003d7a] transition">FAQ</a>
+            <Link href="/wycieczki" className="text-gray-600 hover:text-[#003d7a] transition">
+              {currentContent.about}
+            </Link>
+            <a href="#" className="text-gray-600 hover:text-[#003d7a] transition">
+              Kariera
+            </a>
+            <a href="#" className="text-gray-600 hover:text-[#003d7a] transition">
+              FAQ
+            </a>
           </div>
           <div className="flex gap-1">
-            {config.supportedLanguages?.map((lang) => (
+            {config.supportedLanguages?.map(lang => (
               <button
                 key={lang}
                 onClick={() => changeLanguage(lang)}
@@ -138,7 +148,6 @@ const MainPage = ({ data }: MainPageProps) => {
           </div>
         </div>
       </div>
-
       {/* Main Navigation */}
       <nav className="bg-white sticky top-0 z-50 border-b border-gray-200">
         <div className="container mx-auto px-6">
@@ -174,26 +183,40 @@ const MainPage = ({ data }: MainPageProps) => {
           {/* Menu Bar */}
           <div className="bg-[#003d7a] -mx-6 px-6">
             <div className="flex items-center gap-8 h-14">
-              <a href="#schedule" className="text-white/90 hover:text-white text-sm font-medium transition">
+              <a
+                href="#schedule"
+                className="text-white/90 hover:text-white text-sm font-medium transition"
+              >
                 {currentContent.schedule}
               </a>
-              <a href="#offers" className="text-white/90 hover:text-white text-sm font-medium transition">
+              <a
+                href="#offers"
+                className="text-white/90 hover:text-white text-sm font-medium transition"
+              >
                 {currentContent.offers}
               </a>
-              <a href="#tours" className="text-white/90 hover:text-white text-sm font-medium transition">
+              <Link
+                href="/wycieczki"
+                className="text-white/90 hover:text-white text-sm font-medium transition"
+              >
                 {currentContent.tours}
-              </a>
-              <a href="#cargo" className="text-white/90 hover:text-white text-sm font-medium transition">
+              </Link>
+              <a
+                href="#cargo"
+                className="text-white/90 hover:text-white text-sm font-medium transition"
+              >
                 {currentContent.cargo}
               </a>
-              <a href="#ferries" className="text-white/90 hover:text-white text-sm font-medium transition">
+              <a
+                href="#ferries"
+                className="text-white/90 hover:text-white text-sm font-medium transition"
+              >
                 {currentContent.ourFerries}
               </a>
             </div>
           </div>
         </div>
       </nav>
-
       {/* Hero Section */}
       <section className="bg-[#003d7a] text-white py-40">
         <div className="container mx-auto px-6">
@@ -215,7 +238,6 @@ const MainPage = ({ data }: MainPageProps) => {
           </div>
         </div>
       </section>
-
       {/* Features Section */}
       <section className="py-32 bg-white">
         <div className="container mx-auto px-6">
@@ -231,7 +253,10 @@ const MainPage = ({ data }: MainPageProps) => {
               <p className="text-gray-600 leading-relaxed mb-4 text-sm">
                 {currentContent.feature1Desc}
               </p>
-              <a href="#" className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2">
+              <a
+                href="#"
+                className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
+              >
                 Zobacz więcej
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
@@ -248,7 +273,10 @@ const MainPage = ({ data }: MainPageProps) => {
               <p className="text-gray-600 leading-relaxed mb-4 text-sm">
                 {currentContent.feature2Desc}
               </p>
-              <a href="#" className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2">
+              <a
+                href="#"
+                className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
+              >
                 Zobacz oferty
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
@@ -265,7 +293,10 @@ const MainPage = ({ data }: MainPageProps) => {
               <p className="text-gray-600 leading-relaxed mb-4 text-sm">
                 {currentContent.feature3Desc}
               </p>
-              <a href="#" className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2">
+              <a
+                href="#"
+                className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
+              >
                 Dowiedz się więcej
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
               </a>
@@ -273,7 +304,6 @@ const MainPage = ({ data }: MainPageProps) => {
           </div>
         </div>
       </section>
-
       {/* Stats Section */}
       <section className="bg-gray-50 py-24">
         <div className="container mx-auto px-6">
@@ -297,20 +327,19 @@ const MainPage = ({ data }: MainPageProps) => {
           </div>
         </div>
       </section>
-
       {/* Admin Config Display (Demo) */}
       <section className="py-32 bg-white border-t border-gray-200">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-light text-[#003d7a] mb-2">
-              Admin Configuration
-            </h2>
+            <h2 className="text-3xl font-light text-[#003d7a] mb-2">Admin Configuration</h2>
             <p className="text-gray-500 mb-16 text-sm">
               Live demonstration of the AdminConfigProvider system
             </p>
             <div className="grid md:grid-cols-2 gap-8">
               <div className="border-l-2 border-[#003d7a] pl-6">
-                <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-2">Active Locale</h3>
+                <h3 className="text-xs uppercase tracking-wider text-gray-500 mb-2">
+                  Active Locale
+                </h3>
                 <p className="text-3xl font-light text-[#003d7a]">{config.locale?.toUpperCase()}</p>
               </div>
               <div className="border-l-2 border-[#dc143c] pl-6">
@@ -329,7 +358,6 @@ const MainPage = ({ data }: MainPageProps) => {
           </div>
         </div>
       </section>
-
       {/* Footer */}
       <footer className="bg-[#003d7a] text-white py-20">
         <div className="container mx-auto px-6">
@@ -339,16 +367,26 @@ const MainPage = ({ data }: MainPageProps) => {
               <div className="text-[8px] tracking-widest text-white/60 mb-6">
                 POLSKA ŻEGLUGA BAŁTYCKA SA
               </div>
-              <p className="text-white/70 text-sm leading-relaxed">
-                {currentContent.description}
-              </p>
+              <p className="text-white/70 text-sm leading-relaxed">{currentContent.description}</p>
             </div>
             <div>
               <h3 className="text-sm font-medium mb-4 text-white/90">{currentContent.tours}</h3>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="text-white/60 hover:text-white transition">Szwecja</a></li>
-                <li><a href="#" className="text-white/60 hover:text-white transition">Dania</a></li>
-                <li><a href="#" className="text-white/60 hover:text-white transition">Pakiety turystyczne</a></li>
+                <li>
+                  <a href="#" className="text-white/60 hover:text-white transition">
+                    Szwecja
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-white/60 hover:text-white transition">
+                    Dania
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="text-white/60 hover:text-white transition">
+                    Pakiety turystyczne
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
@@ -362,9 +400,15 @@ const MainPage = ({ data }: MainPageProps) => {
             <div>
               <h3 className="text-sm font-medium mb-4 text-white/90">Social Media</h3>
               <div className="flex gap-3">
-                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">📘</a>
-                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">📷</a>
-                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">🐦</a>
+                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">
+                  📘
+                </a>
+                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">
+                  📷
+                </a>
+                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">
+                  🐦
+                </a>
               </div>
             </div>
           </div>
