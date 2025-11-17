@@ -184,13 +184,13 @@ const MainPage = ({ data }: MainPageProps) => {
           <div className="bg-[#003d7a] -mx-6 px-6">
             <div className="flex items-center gap-8 h-14">
               <a
-                href="#schedule"
+                href="schedule"
                 className="text-white/90 hover:text-white text-sm font-medium transition"
               >
                 {currentContent.schedule}
               </a>
               <a
-                href="#offers"
+                href="offers"
                 className="text-white/90 hover:text-white text-sm font-medium transition"
               >
                 {currentContent.offers}
