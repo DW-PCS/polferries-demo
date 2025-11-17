@@ -1,7 +1,8 @@
+import LayoutWrapper from '@/components/LayoutWrapper';
 import MainPage from '@/components/pages/main-page';
 import { payload } from '@/config';
-import getNavigation from '@/lib/utils/getters/navigation';
 import getFooter from '@/lib/utils/getters/footer';
+import getNavigation from '@/lib/utils/getters/navigation';
 import getSocialMedia from '@/lib/utils/getters/socialMedia';
 
 export default async function Home() {
@@ -17,11 +18,12 @@ export default async function Home() {
   const { links: socialMediaLinks } = await getSocialMedia();
 
   return (
-    <MainPage
-      data={data}
+    <LayoutWrapper
       navigationLinks={links}
       footerData={footerData}
       socialMediaLinks={socialMediaLinks}
-    />
+    >
+      <MainPage data={data} />;
+    </LayoutWrapper>
   );
 }

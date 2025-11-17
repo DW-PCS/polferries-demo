@@ -3,9 +3,6 @@
 import { useAdminConfig } from '@/providers/AdminConfigProvider';
 import Link from 'next/link';
 import { JsonObject } from 'payload';
-import { useState } from 'react';
-import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 import {
   Calendar,
   Map,
@@ -21,48 +18,8 @@ import {
   LucideIcon
 } from 'lucide-react';
 
-interface NavLink {
-  id: string;
-  name: string;
-  href: string;
-  openInNewTab?: boolean;
-  order: number;
-}
-
-interface FooterLink {
-  id: string;
-  text: string;
-  url: string;
-  openInNewTab?: boolean;
-  order: number;
-}
-
-interface FooterColumn {
-  id: string;
-  title: string;
-  order: number;
-  links: FooterLink[];
-}
-
-interface SocialMediaLink {
-  id: string;
-  platform: string;
-  iconType: 'facebook' | 'instagram' | 'linkedin' | 'twitter' | 'youtube' | 'tiktok';
-  url: string;
-  order: number;
-}
-
-interface FooterData {
-  companyDescription: string;
-  copyright: string;
-  columns: FooterColumn[];
-}
-
 interface MainPageProps {
   data: JsonObject;
-  navigationLinks?: NavLink[];
-  footerData?: FooterData;
-  socialMediaLinks?: SocialMediaLink[];
 }
 
 // Icon map for converting string icon names to Lucide React components
@@ -80,13 +37,8 @@ const iconMap: Record<string, LucideIcon> = {
   briefcase: Briefcase,
 };
 
-const MainPage = ({ data, navigationLinks = [], footerData, socialMediaLinks = [] }: MainPageProps) => {
-  const { config, updateConfig } = useAdminConfig();
-  const [showDemo, setShowDemo] = useState(true);
-
-  const changeLanguage = (locale: string) => {
-    updateConfig({ locale });
-  };
+const MainPage = ({ data }: MainPageProps) => {
+  const { config } = useAdminConfig();
 
   const content = {
     pl: {
@@ -172,30 +124,23 @@ const MainPage = ({ data, navigationLinks = [], footerData, socialMediaLinks = [
   const currentContent = content[config.locale as keyof typeof content] || content.pl;
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation Component */}
-      <Navigation
-        links={navigationLinks}
-        locale={config.locale || 'pl'}
-        onLanguageChange={changeLanguage}
-        supportedLanguages={config.supportedLanguages || ['pl', 'en', 'se']}
-      />
+    <div className="bg-white">
       {/* Hero Section */}
       <section className="bg-[#003d7a] text-white py-40">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-light mb-6 leading-tight">
-              {data?.heroTagline || currentContent.tagline}
+              {data?.heroTagline}
             </h1>
             <p className="text-xl text-white/80 mb-12 font-light leading-relaxed">
-              {data?.heroDescription || currentContent.description}
+              {data?.heroDescription}
             </p>
             <div className="flex gap-4">
               <button className="bg-[#dc143c] hover:bg-[#c01232] text-white px-10 py-4 text-sm font-medium transition">
-                {data?.heroCTAText || currentContent.cta}
+                {data?.heroCTAText}
               </button>
               <button className="border border-white/30 hover:border-white/50 text-white px-10 py-4 text-sm font-medium transition">
-                {data?.heroSecondaryCTAText || currentContent.schedule}
+                {data?.heroSecondaryCTAText}
               </button>
             </div>
           </div>
@@ -360,13 +305,6 @@ const MainPage = ({ data, navigationLinks = [], footerData, socialMediaLinks = [
           </div>
         </div>
       </section>
-      {/* Footer Component */}
-      <Footer
-        companyDescription={footerData?.companyDescription}
-        copyright={footerData?.copyright}
-        columns={footerData?.columns}
-        socialMediaLinks={socialMediaLinks}
-      />
     </div>
   );
 };
