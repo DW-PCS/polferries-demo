@@ -69,13 +69,12 @@ const Footer = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12 lg:mb-16">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <div className="text-xl sm:text-2xl font-bold mb-1">polferries</div>
+            {companyDescription && (
+              <div className="text-xl sm:text-2xl font-bold mb-1">{companyDescription}</div>
+            )}
             <div className="text-[8px] tracking-widest text-white/60 mb-4 sm:mb-6">
               POLSKA ŻEGLUGA BAŁTYCKA SA
             </div>
-            {companyDescription && (
-              <p className="text-white/70 text-sm leading-relaxed">{companyDescription}</p>
-            )}
           </div>
 
           {/* Dynamic Footer Columns */}
