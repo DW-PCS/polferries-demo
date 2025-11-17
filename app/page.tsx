@@ -5,7 +5,7 @@ import getFooter from '@/lib/utils/getters/footer';
 import getSocialMedia from '@/lib/utils/getters/socialMedia';
 
 export default async function Home() {
-  const locale = 'pl'; 
+  const locale = 'pl';
 
   const data = await payload.findGlobal({
     slug: 'MainPage',

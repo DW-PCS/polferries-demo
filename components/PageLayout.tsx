@@ -52,7 +52,7 @@ const PageLayout = ({
   children,
   navigationLinks = [],
   footerData,
-  socialMediaLinks = []
+  socialMediaLinks = [],
 }: PageLayoutProps) => {
   const { config, updateConfig } = useAdminConfig();
 
