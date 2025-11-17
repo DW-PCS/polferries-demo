@@ -21,16 +21,14 @@ import path from 'path';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
-import { Attractions } from './collections/Attractions';
-import { Footer, Media, Navigation, Offers, Trips, Users } from './collections/index';
-import { Promotions } from './collections/Promotions';
+import { Footer, Media, Navigation, Trips, Users } from './collections/index';
 
 import { MainPage } from './globals/MainPage';
 import { SocialMedia } from './globals/SocialMedia';
 
 export default buildConfig({
   globals: [MainPage, Footer, Navigation, SocialMedia],
-  collections: [Users, Media, Trips, Offers, Promotions, Attractions],
+  collections: [Users, Media, Trips],
   plugins: [
     vercelBlobStorage({
       enabled: true,

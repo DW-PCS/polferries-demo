@@ -1,9 +1,19 @@
-import Navbar from '@/components/Navbar';
+import PageLayout from '@/components/PageLayout';
+import getNavigation from '@/lib/utils/getters/navigation';
+import getFooter from '@/lib/utils/getters/footer';
+import getSocialMedia from '@/lib/utils/getters/socialMedia';
 
-export default function FerriesPage() {
+export default async function FerriesPage() {
+  const { links } = await getNavigation('pl');
+  const footerData = await getFooter('pl');
+  const { links: socialMediaLinks } = await getSocialMedia();
+
   return (
-    <>
-      <Navbar />
+    <PageLayout
+      navigationLinks={links}
+      footerData={footerData}
+      socialMediaLinks={socialMediaLinks}
+    >
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-6 text-[#003d7a]">Nasze Promy</h1>
 
@@ -32,6 +42,6 @@ export default function FerriesPage() {
           </p>
         </div>
       </div>
-    </>
+    </PageLayout>
   );
 }

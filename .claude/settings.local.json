@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(nul)",
-      "Bash(dir /b /s *.nextserverchunks2989.js 2)"
+      "Bash(dir /b /s *.nextserverchunks2989.js 2)",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(dir /b /s *.page.tsx 2)",
+      "Bash(findstr:*)",
+      "Bash(npm run payload:*)"
     ],
     "deny": [],
     "ask": []

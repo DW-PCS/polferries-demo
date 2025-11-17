@@ -4,12 +4,83 @@ import { useAdminConfig } from '@/providers/AdminConfigProvider';
 import Link from 'next/link';
 import { JsonObject } from 'payload';
 import { useState } from 'react';
+import Navigation from '@/components/Navigation';
+import Footer from '@/components/Footer';
+import {
+  Calendar,
+  Map,
+  Package,
+  Ship,
+  Anchor,
+  Waves,
+  MapPin,
+  Clock,
+  DollarSign,
+  Users,
+  Briefcase,
+  LucideIcon
+} from 'lucide-react';
+
+interface NavLink {
+  id: string;
+  name: string;
+  href: string;
+  openInNewTab?: boolean;
+  order: number;
+}
+
+interface FooterLink {
+  id: string;
+  text: string;
+  url: string;
+  openInNewTab?: boolean;
+  order: number;
+}
+
+interface FooterColumn {
+  id: string;
+  title: string;
+  order: number;
+  links: FooterLink[];
+}
+
+interface SocialMediaLink {
+  id: string;
+  platform: string;
+  iconType: 'facebook' | 'instagram' | 'linkedin' | 'twitter' | 'youtube' | 'tiktok';
+  url: string;
+  order: number;
+}
+
+interface FooterData {
+  companyDescription: string;
+  copyright: string;
+  columns: FooterColumn[];
+}
 
 interface MainPageProps {
   data: JsonObject;
+  navigationLinks?: NavLink[];
+  footerData?: FooterData;
+  socialMediaLinks?: SocialMediaLink[];
 }
 
-const MainPage = ({ data }: MainPageProps) => {
+// Icon map for converting string icon names to Lucide React components
+const iconMap: Record<string, LucideIcon> = {
+  calendar: Calendar,
+  map: Map,
+  package: Package,
+  ship: Ship,
+  anchor: Anchor,
+  waves: Waves,
+  mapPin: MapPin,
+  clock: Clock,
+  dollarSign: DollarSign,
+  users: Users,
+  briefcase: Briefcase,
+};
+
+const MainPage = ({ data, navigationLinks = [], footerData, socialMediaLinks = [] }: MainPageProps) => {
   const { config, updateConfig } = useAdminConfig();
   const [showDemo, setShowDemo] = useState(true);
 
@@ -102,137 +173,29 @@ const MainPage = ({ data }: MainPageProps) => {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Demo Notice */}
-      {showDemo && (
-        <div className="bg-[#003d7a] text-white py-2 px-4">
-          <div className="container mx-auto flex items-center justify-between">
-            <p className="text-xs font-medium">Demo Mode</p>
-            <button
-              onClick={() => setShowDemo(false)}
-              className="text-white/70 hover:text-white text-xs transition"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Top Bar */}
-      <div className="border-b border-gray-200">
-        <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-          <div className="flex gap-6 text-xs">
-            <Link href="/wycieczki" className="text-gray-600 hover:text-[#003d7a] transition">
-              {currentContent.about}
-            </Link>
-            <a href="#" className="text-gray-600 hover:text-[#003d7a] transition">
-              Kariera
-            </a>
-            <a href="#" className="text-gray-600 hover:text-[#003d7a] transition">
-              FAQ
-            </a>
-          </div>
-          <div className="flex gap-1">
-            {config.supportedLanguages?.map(lang => (
-              <button
-                key={lang}
-                onClick={() => changeLanguage(lang)}
-                className={`px-3 py-1 text-xs font-medium transition-all rounded ${
-                  config.locale === lang
-                    ? 'bg-[#003d7a] text-white'
-                    : 'text-gray-600 hover:bg-gray-100'
-                }`}
-              >
-                {lang.toUpperCase()}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-      {/* Main Navigation */}
-      <nav className="bg-white sticky top-0 z-50 border-b border-gray-200">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between h-24">
-            {/* Logo */}
-            <div className="text-[#003d7a]">
-              <div className="text-3xl font-bold tracking-tight">polferries</div>
-              <div className="text-[9px] font-medium tracking-widest text-gray-500 mt-0.5">
-                POLSKA ŻEGLUGA BAŁTYCKA SA
-              </div>
-            </div>
-
-            {/* Tagline */}
-            <div className="hidden lg:block text-sm text-gray-600 font-light">
-              {currentContent.hero}
-            </div>
-
-            {/* Actions */}
-            <div className="flex items-center gap-4">
-              <button className="text-gray-400 hover:text-[#003d7a] transition">
-                <span className="text-lg">🔍</span>
-              </button>
-              <button className="text-gray-400 hover:text-[#003d7a] transition hidden md:flex items-center gap-2">
-                <span className="text-lg">☎️</span>
-                <span className="text-sm text-gray-600">{currentContent.contact}</span>
-              </button>
-              <button className="bg-[#dc143c] hover:bg-[#c01232] text-white px-8 py-3 text-sm font-medium transition">
-                {currentContent.buyTicket}
-              </button>
-            </div>
-          </div>
-
-          {/* Menu Bar */}
-          <div className="bg-[#003d7a] -mx-6 px-6">
-            <div className="flex items-center gap-8 h-14">
-              <a
-                href="schedule"
-                className="text-white/90 hover:text-white text-sm font-medium transition"
-              >
-                {currentContent.schedule}
-              </a>
-              <a
-                href="offers"
-                className="text-white/90 hover:text-white text-sm font-medium transition"
-              >
-                {currentContent.offers}
-              </a>
-              <Link
-                href="/wycieczki"
-                className="text-white/90 hover:text-white text-sm font-medium transition"
-              >
-                {currentContent.tours}
-              </Link>
-              <a
-                href="#cargo"
-                className="text-white/90 hover:text-white text-sm font-medium transition"
-              >
-                {currentContent.cargo}
-              </a>
-              <a
-                href="#ferries"
-                className="text-white/90 hover:text-white text-sm font-medium transition"
-              >
-                {currentContent.ourFerries}
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
+      {/* Navigation Component */}
+      <Navigation
+        links={navigationLinks}
+        locale={config.locale || 'pl'}
+        onLanguageChange={changeLanguage}
+        supportedLanguages={config.supportedLanguages || ['pl', 'en', 'se']}
+      />
       {/* Hero Section */}
       <section className="bg-[#003d7a] text-white py-40">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-light mb-6 leading-tight">
-              {currentContent.tagline}
+              {data?.heroTagline || currentContent.tagline}
             </h1>
             <p className="text-xl text-white/80 mb-12 font-light leading-relaxed">
-              {currentContent.description}
+              {data?.heroDescription || currentContent.description}
             </p>
             <div className="flex gap-4">
               <button className="bg-[#dc143c] hover:bg-[#c01232] text-white px-10 py-4 text-sm font-medium transition">
-                {currentContent.cta}
+                {data?.heroCTAText || currentContent.cta}
               </button>
               <button className="border border-white/30 hover:border-white/50 text-white px-10 py-4 text-sm font-medium transition">
-                {currentContent.schedule}
+                {data?.heroSecondaryCTAText || currentContent.schedule}
               </button>
             </div>
           </div>
@@ -242,65 +205,93 @@ const MainPage = ({ data }: MainPageProps) => {
       <section className="py-32 bg-white">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-12">
-            {/* Feature 1 */}
-            <div className="group">
-              <div className="mb-6">
-                <span className="text-5xl">📅</span>
-              </div>
-              <h3 className="text-xl font-medium text-[#003d7a] mb-3">
-                {currentContent.feature1Title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed mb-4 text-sm">
-                {currentContent.feature1Desc}
-              </p>
-              <a
-                href="#"
-                className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
-              >
-                Zobacz więcej
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-            </div>
-
-            {/* Feature 2 */}
-            <div className="group">
-              <div className="mb-6">
-                <span className="text-5xl">🗺️</span>
-              </div>
-              <h3 className="text-xl font-medium text-[#003d7a] mb-3">
-                {currentContent.feature2Title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed mb-4 text-sm">
-                {currentContent.feature2Desc}
-              </p>
-              <a
-                href="#"
-                className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
-              >
-                Zobacz oferty
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-            </div>
-
-            {/* Feature 3 */}
-            <div className="group">
-              <div className="mb-6">
-                <span className="text-5xl">📦</span>
-              </div>
-              <h3 className="text-xl font-medium text-[#003d7a] mb-3">
-                {currentContent.feature3Title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed mb-4 text-sm">
-                {currentContent.feature3Desc}
-              </p>
-              <a
-                href="#"
-                className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
-              >
-                Dowiedz się więcej
-                <span className="group-hover:translate-x-1 transition-transform">→</span>
-              </a>
-            </div>
+            {data?.features && Array.isArray(data.features) && data.features.length > 0 ? (
+              data.features.map((feature: any, index: number) => {
+                const IconComponent = feature.icon ? iconMap[feature.icon] : null;
+                return (
+                  <div key={index} className="group">
+                    <div className="mb-6 text-[#003d7a]">
+                      {IconComponent ? (
+                        <IconComponent className="w-12 h-12" strokeWidth={1.5} />
+                      ) : (
+                        <span className="text-5xl">{feature.icon}</span>
+                      )}
+                    </div>
+                    <h3 className="text-xl font-medium text-[#003d7a] mb-3">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+                      {feature.description}
+                    </p>
+                    <Link
+                      href={feature.linkUrl}
+                      className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
+                    >
+                      {feature.linkText}
+                      <span className="group-hover:translate-x-1 transition-transform">→</span>
+                    </Link>
+                  </div>
+                );
+              })
+            ) : (
+              <>
+                {/* Fallback features */}
+                <div className="group">
+                  <div className="mb-6">
+                    <span className="text-5xl">📅</span>
+                  </div>
+                  <h3 className="text-xl font-medium text-[#003d7a] mb-3">
+                    {currentContent.feature1Title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+                    {currentContent.feature1Desc}
+                  </p>
+                  <a
+                    href="#"
+                    className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
+                  >
+                    Zobacz więcej
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+                </div>
+                <div className="group">
+                  <div className="mb-6">
+                    <span className="text-5xl">🗺️</span>
+                  </div>
+                  <h3 className="text-xl font-medium text-[#003d7a] mb-3">
+                    {currentContent.feature2Title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+                    {currentContent.feature2Desc}
+                  </p>
+                  <a
+                    href="#"
+                    className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
+                  >
+                    Zobacz oferty
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+                </div>
+                <div className="group">
+                  <div className="mb-6">
+                    <span className="text-5xl">📦</span>
+                  </div>
+                  <h3 className="text-xl font-medium text-[#003d7a] mb-3">
+                    {currentContent.feature3Title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-4 text-sm">
+                    {currentContent.feature3Desc}
+                  </p>
+                  <a
+                    href="#"
+                    className="text-[#dc143c] text-sm font-medium hover:opacity-70 transition inline-flex items-center gap-2"
+                  >
+                    Dowiedz się więcej
+                    <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -308,22 +299,33 @@ const MainPage = ({ data }: MainPageProps) => {
       <section className="bg-gray-50 py-24">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-4 gap-16">
-            <div>
-              <p className="text-5xl font-light mb-2 text-[#003d7a]">30+</p>
-              <p className="text-gray-600 text-sm">{currentContent.stats1}</p>
-            </div>
-            <div>
-              <p className="text-5xl font-light mb-2 text-[#003d7a]">500K+</p>
-              <p className="text-gray-600 text-sm">{currentContent.stats2}</p>
-            </div>
-            <div>
-              <p className="text-5xl font-light mb-2 text-[#003d7a]">150+</p>
-              <p className="text-gray-600 text-sm">{currentContent.stats3}</p>
-            </div>
-            <div>
-              <p className="text-5xl font-light mb-2 text-[#003d7a]">5★</p>
-              <p className="text-gray-600 text-sm">{currentContent.stats4}</p>
-            </div>
+            {data?.stats && Array.isArray(data.stats) && data.stats.length > 0 ? (
+              data.stats.map((stat: any, index: number) => (
+                <div key={index}>
+                  <p className="text-5xl font-light mb-2 text-[#003d7a]">{stat.value}</p>
+                  <p className="text-gray-600 text-sm">{stat.label}</p>
+                </div>
+              ))
+            ) : (
+              <>
+                <div>
+                  <p className="text-5xl font-light mb-2 text-[#003d7a]">30+</p>
+                  <p className="text-gray-600 text-sm">{currentContent.stats1}</p>
+                </div>
+                <div>
+                  <p className="text-5xl font-light mb-2 text-[#003d7a]">500K+</p>
+                  <p className="text-gray-600 text-sm">{currentContent.stats2}</p>
+                </div>
+                <div>
+                  <p className="text-5xl font-light mb-2 text-[#003d7a]">150+</p>
+                  <p className="text-gray-600 text-sm">{currentContent.stats3}</p>
+                </div>
+                <div>
+                  <p className="text-5xl font-light mb-2 text-[#003d7a]">5★</p>
+                  <p className="text-gray-600 text-sm">{currentContent.stats4}</p>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </section>
@@ -358,65 +360,13 @@ const MainPage = ({ data }: MainPageProps) => {
           </div>
         </div>
       </section>
-      {/* Footer */}
-      <footer className="bg-[#003d7a] text-white py-20">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-12 mb-16">
-            <div>
-              <div className="text-2xl font-bold mb-1">polferries</div>
-              <div className="text-[8px] tracking-widest text-white/60 mb-6">
-                POLSKA ŻEGLUGA BAŁTYCKA SA
-              </div>
-              <p className="text-white/70 text-sm leading-relaxed">{currentContent.description}</p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium mb-4 text-white/90">{currentContent.tours}</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="#" className="text-white/60 hover:text-white transition">
-                    Szwecja
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-white/60 hover:text-white transition">
-                    Dania
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-white/60 hover:text-white transition">
-                    Pakiety turystyczne
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium mb-4 text-white/90">{currentContent.contact}</h3>
-              <ul className="space-y-2 text-sm">
-                <li className="text-white/60">info@polferries.com</li>
-                <li className="text-white/60">+48 123 456 789</li>
-                <li className="text-white/60">+48 123 456 790</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium mb-4 text-white/90">Social Media</h3>
-              <div className="flex gap-3">
-                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">
-                  📘
-                </a>
-                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">
-                  📷
-                </a>
-                <a href="#" className="text-2xl opacity-60 hover:opacity-100 transition">
-                  🐦
-                </a>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-white/10 pt-8">
-            <p className="text-white/50 text-xs">© 2025 PolFerries - Polska Żegluga Bałtycka SA</p>
-          </div>
-        </div>
-      </footer>
+      {/* Footer Component */}
+      <Footer
+        companyDescription={footerData?.companyDescription}
+        copyright={footerData?.copyright}
+        columns={footerData?.columns}
+        socialMediaLinks={socialMediaLinks}
+      />
     </div>
   );
 };
