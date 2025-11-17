@@ -1,6 +1,7 @@
-import LayoutWrapper from '@/components/LayoutWrapper';
 import MainPage from '@/components/pages/main-page';
+import LayoutWrapper from '@/components/ui/LayoutWrapper';
 import { payload } from '@/config';
+import { MainPageData } from '@/lib/types';
 import getFooter from '@/lib/utils/getters/footer';
 import getNavigation from '@/lib/utils/getters/navigation';
 import getSocialMedia from '@/lib/utils/getters/socialMedia';
@@ -23,7 +24,7 @@ export default async function Home() {
       footerData={footerData}
       socialMediaLinks={socialMediaLinks}
     >
-      <MainPage data={data} />;
+      <MainPage data={data as MainPageData} />
     </LayoutWrapper>
   );
 }

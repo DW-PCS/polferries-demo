@@ -1,32 +1,35 @@
+import { PageContainer, PageHeader, ContentSection } from '@/components/common';
+
 export default async function SchedulePage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-6 text-[#003d7a]">Rozkład i Cennik</h1>
+    <PageContainer>
+      <PageHeader title="Rozkład i Cennik" />
 
-      <div className="prose max-w-none">
-        <p className="text-lg text-gray-700 mb-4">
+      <ContentSection>
+        <p className="text-lg mb-4">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </p>
+      </ContentSection>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800">Rozkład rejsów</h2>
-        <p className="text-gray-700 mb-4">
+      <ContentSection title="Rozkład rejsów">
+        <p className="mb-4">
           Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
           Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
+      </ContentSection>
 
-        <h2 className="text-2xl font-semibold mt-8 mb-4 text-gray-800">Cennik biletów</h2>
-        <p className="text-gray-700 mb-4">
+      <ContentSection title="Cennik biletów">
+        <p className="mb-4">
           Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
           totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
         </p>
-
-        <p className="text-gray-700">
+        <p>
           Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
           eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
           consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
         </p>
-      </div>
-    </div>
+      </ContentSection>
+    </PageContainer>
   );
 }

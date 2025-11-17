@@ -1,46 +1,10 @@
 'use client';
 
+import { FooterData, NavLink, SocialMediaLink } from '@/lib/types';
 import { useAdminConfig } from '@/providers/AdminConfigProvider';
 import { usePathname } from 'next/navigation';
 import Footer from './Footer';
 import Navigation from './Navigation';
-
-interface NavLink {
-  id: string;
-  name: string;
-  href: string;
-  openInNewTab?: boolean;
-  order: number;
-}
-
-interface FooterLink {
-  id: string;
-  text: string;
-  url: string;
-  openInNewTab?: boolean;
-  order: number;
-}
-
-interface FooterColumn {
-  id: string;
-  title: string;
-  order: number;
-  links: FooterLink[];
-}
-
-interface SocialMediaLink {
-  id: string;
-  platform: string;
-  iconType: 'facebook' | 'instagram' | 'linkedin' | 'twitter' | 'youtube' | 'tiktok';
-  url: string;
-  order: number;
-}
-
-interface FooterData {
-  companyDescription: string;
-  copyright: string;
-  columns: FooterColumn[];
-}
 
 interface LayoutWrapperProps {
   children: React.ReactNode;

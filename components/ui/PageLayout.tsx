@@ -1,8 +1,9 @@
 'use client';
 
+import { useAdminConfig } from '@/providers/AdminConfigProvider';
 import Navigation from './Navigation';
 import Footer from './Footer';
-import { useAdminConfig } from '@/providers/AdminConfigProvider';
+
 
 interface NavLink {
   id: string;
@@ -69,9 +70,7 @@ const PageLayout = ({
         supportedLanguages={config.supportedLanguages || ['pl', 'en', 'se']}
       />
 
-      <main className="flex-grow">
-        {children}
-      </main>
+      <main className="flex-grow">{children}</main>
 
       <Footer
         companyDescription={footerData?.companyDescription}

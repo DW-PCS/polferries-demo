@@ -2,29 +2,7 @@
 
 import { Facebook, Instagram, Linkedin, Music, Twitter, Youtube } from 'lucide-react';
 import Link from 'next/link';
-
-interface FooterLink {
-  id: string;
-  text: string;
-  url: string;
-  openInNewTab?: boolean;
-  order: number;
-}
-
-interface FooterColumn {
-  id: string;
-  title: string;
-  order: number;
-  links: FooterLink[];
-}
-
-interface SocialMediaLink {
-  id: string;
-  platform: string;
-  iconType: 'facebook' | 'instagram' | 'linkedin' | 'twitter' | 'youtube' | 'tiktok';
-  url: string;
-  order: number;
-}
+import { FooterColumn, SocialMediaLink } from '@/lib/types';
 
 interface FooterProps {
   companyDescription?: string;

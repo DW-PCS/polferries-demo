@@ -1,4 +1,4 @@
-import LayoutWrapper from '@/components/LayoutWrapper';
+import LayoutWrapper from '@/components/ui/LayoutWrapper';
 import getFooter from '@/lib/utils/getters/footer';
 import getNavigation from '@/lib/utils/getters/navigation';
 import getSocialMedia from '@/lib/utils/getters/socialMedia';
