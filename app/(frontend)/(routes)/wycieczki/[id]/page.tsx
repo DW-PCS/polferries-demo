@@ -1,4 +1,5 @@
 import Navbar from '@/components/Navbar';
+import RichText from '@/components/RichText';
 import config from '@payload-config';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -71,10 +72,7 @@ async function TourDetailPage({ params }: TourDetailPageProps) {
           {tour.fullDescription && (
             <div className="mb-8">
               <h2 className="text-2xl font-semibold mb-3">Szczegóły wycieczki</h2>
-              <div
-                className="prose max-w-none"
-                dangerouslySetInnerHTML={{ __html: tour.fullDescription }}
-              />
+              <RichText content={tour.fullDescription} />
             </div>
           )}
 
@@ -85,7 +83,7 @@ async function TourDetailPage({ params }: TourDetailPageProps) {
                 {tour.dailyProgram.map((day: any) => (
                   <div key={day.id} className="border-l-4 border-blue-500 pl-4 py-2">
                     <h3 className="font-semibold text-lg mb-2">Dzień {day.day}</h3>
-                    <div className="prose" dangerouslySetInnerHTML={{ __html: day.description }} />
+                    <RichText content={day.description} />
                   </div>
                 ))}
               </div>
